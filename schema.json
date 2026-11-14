@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://unpkg.com/pkg-guard/schema.json",
+  "title": "pkg-guard configuration",
+  "description": "Configuration for pkg-guard (pkg-guard.config.json or the \"pkg-guard\" key in package.json).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "failOn": {
+      "description": "Block (exit code 1) when a vulnerability of this severity or higher is found. \"none\" never blocks on vulnerabilities.",
+      "enum": ["none", "low", "moderate", "high", "critical"],
+      "default": "high"
+    },
+    "production": {
+      "description": "Only check dependencies that ship with your app (ignore devDependencies).",
+      "type": "boolean",
+      "default": false
+    },
+    "strict": {
+      "description": "Exit with code 2 when a check cannot run (for example no internet). Recommended for CI.",
+      "type": "boolean",
+      "default": false
+    },
+    "timeoutMs": {
+      "description": "Maximum time for each npm command, in milliseconds.",
+      "type": "integer",
+      "minimum": 1000,
+      "default": 120000
+    },
+    "checks": {
+      "description": "Turn individual checks on or off.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "audit": { "type": "boolean", "default": true, "description": "Known vulnerabilities (npm audit)." },
+        "outdated": { "type": "boolean", "default": true, "description": "Packages with newer versions (npm outdated)." },
+        "unused": { "type": "boolean", "default": true, "description": "Dependencies that are never used." },
+        "fit": { "type": "boolean", "default": true, "description": "Hints about packages that Node.js now covers natively." }
+      }
+    },
+    "outdated": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "failOn": {
+          "description": "Block when a package is behind by at least this much. \"never\" only reports.",
+          "enum": ["never", "patch", "minor", "major"],
+          "default": "never"
+        },
+        "ignore": {
+          "description": "Package names (wildcard * allowed) that are never reported as outdated.",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      }
+    },
+    "unused": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fail": { "description": "Block when an unused dependency is found.", "type": "boolean", "default": false },
+        "ignore": {
+          "description": "Package names (wildcard * allowed) that are never reported as unused.",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "sourceDirs": {
+          "description": "Folders that contain your source code. Empty means the whole project (without node_modules).",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      }
+    },
+    "ignore": {
+      "description": "Vulnerabilities you have reviewed and accept. Every rule needs a reason.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["package", "reason"],
+        "properties": {
+          "package": { "type": "string", "description": "Package name." },
+          "advisory": { "type": "string", "description": "Advisory id (GHSA-xxxx-xxxx-xxxx). Without it, all advisories of the package are ignored." },
+          "reason": { "type": "string", "minLength": 1, "description": "Why it is safe to ignore." },
+          "expires": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "Date (YYYY-MM-DD) after which the rule stops applying." }
+        }
+      }
+    }
+  }
+}
