@@ -1,0 +1,7 @@
+# The "files" field in package.json is the source of truth; this is a safety net.
+src/
+test/
+scripts/
+.test-build/
+tsconfig*.json
+*.tgz
