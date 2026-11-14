@@ -1,0 +1,54 @@
+{
+  "name": "pkg-guard",
+  "version": "1.0.0",
+  "description": "One command to check your npm dependencies for vulnerabilities, outdated versions and unused packages - and block the build when it matters.",
+  "keywords": [
+    "npm",
+    "audit",
+    "security",
+    "vulnerability",
+    "outdated",
+    "dependencies",
+    "unused",
+    "scanner",
+    "ci",
+    "supply-chain"
+  ],
+  "license": "MIT",
+  "bin": {
+    "pkg-guard": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schema.json": "./schema.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "schema.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "node scripts/run-tests.mjs",
+    "guard": "node dist/cli.js scan",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^6.0.0"
+  }
+}
