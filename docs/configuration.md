@@ -16,7 +16,7 @@ Command line flags (`--fail-on`, `--production`, `--strict`, `--skip`) are appli
 Create a starter file with `npx pkg-guard init`. Add this line to get editor autocomplete and validation:
 
 ```json
-{ "$schema": "./node_modules/pkg-guard/schema.json" }
+{ "$schema": "./node_modules/@filmona/pkg-guard/schema.json" }
 ```
 
 Unknown option names and wrong value types are **errors** (exit code 2), not silently ignored.

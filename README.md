@@ -55,7 +55,7 @@ More guides: [Configuration reference](docs/configuration.md) · [CI/CD recipes]
 
 ```bash
 # 1. Install it in your project
-npm install --save-dev pkg-guard
+npm install --save-dev @filmona/pkg-guard
 
 # 2. Create the config file and a "guard" script
 npx pkg-guard init --hooks
@@ -75,21 +75,21 @@ Don't want to install anything yet? Try it once with `npx pkg-guard scan` in you
 
 ## What it checks
 
-| Check | What it finds | Based on | Can block the build? |
-|---|---|---|---|
-| **Vulnerabilities** (`audit`) | Packages with known security advisories, including packages deep inside your dependency tree | `npm audit` | Yes, by default for `high` and `critical` |
-| **Outdated** (`outdated`) | Packages with a newer version, labelled patch, minor or major | `npm outdated` | Only if you choose (`outdated.failOn`) |
-| **Unused** (`unused`) | Dependencies that your code, scripts and config never reference | Scans your source files | Only if you choose (`unused.fail`) |
-| **Fit hints** (`fit`) | Packages that Node.js now covers itself, like `axios` (use `fetch`) or `uuid` (use `crypto.randomUUID()`), and deprecated packages like `request` | A small built-in list | Never. Hints only |
+| Check                                 | What it finds                                                                                                                                               | Based on                | Can block the build?                          |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------- |
+| **Vulnerabilities** (`audit`) | Packages with known security advisories, including packages deep inside your dependency tree                                                                | `npm audit`           | Yes, by default for `high` and `critical` |
+| **Outdated** (`outdated`)     | Packages with a newer version, labelled patch, minor or major                                                                                               | `npm outdated`        | Only if you choose (`outdated.failOn`)      |
+| **Unused** (`unused`)         | Dependencies that your code, scripts and config never reference                                                                                             | Scans your source files | Only if you choose (`unused.fail`)          |
+| **Fit hints** (`fit`)         | Packages that Node.js now covers itself, like `axios` (use `fetch`) or `uuid` (use `crypto.randomUUID()`), and deprecated packages like `request` | A small built-in list   | Never. Hints only                             |
 
 Every package ends up with **one status**:
 
-| Status | Meaning |
-|---|---|
+| Status         | Meaning                                                 |
+| -------------- | ------------------------------------------------------- |
 | `vulnerable` | Has at least one known vulnerability (highest priority) |
-| `outdated` | A newer version exists |
-| `unused` | Nothing in your project seems to use it |
-| `safe` | Nothing found |
+| `outdated`   | A newer version exists                                  |
+| `unused`     | Nothing in your project seems to use it                 |
+| `safe`       | Nothing found                                           |
 
 A package with several problems shows the most serious status and lists all its findings.
 
@@ -160,35 +160,35 @@ pkg-guard --help | --version
 
 ### Scan options
 
-| Option | Description |
-|---|---|
+| Option                | Description                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `--fail-on <level>` | Block on vulnerabilities of this severity or higher: `low`, `moderate`, `high` (default), `critical`, or `none` |
-| `--production` | Ignore `devDependencies` |
-| `--strict` | Exit with code `2` if any check could not run |
-| `--skip <checks>` | Skip checks, comma separated: `audit`, `outdated`, `unused`, `fit` |
-| `--format <format>` | `text` (default), `json` or `markdown` |
-| `--output <file>` | Also save the report (in the chosen format) to a file |
-| `--config <file>` | Use a specific config file |
-| `--cwd <folder>` | Project folder (default: current folder) |
-| `--warn-only` | Print problems but always exit `0` |
-| `--quiet`, `-q` | Short output: summary and reasons for failing only |
-| `--verbose` | Also list safe packages and fit hints |
-| `--no-color` | Disable colors (also honours `NO_COLOR`; `FORCE_COLOR` forces them on) |
+| `--production`      | Ignore `devDependencies`                                                                                                |
+| `--strict`          | Exit with code `2` if any check could not run                                                                           |
+| `--skip <checks>`   | Skip checks, comma separated: `audit`, `outdated`, `unused`, `fit`                                                |
+| `--format <format>` | `text` (default), `json` or `markdown`                                                                              |
+| `--output <file>`   | Also save the report (in the chosen format) to a file                                                                     |
+| `--config <file>`   | Use a specific config file                                                                                                |
+| `--cwd <folder>`    | Project folder (default: current folder)                                                                                  |
+| `--warn-only`       | Print problems but always exit `0`                                                                                      |
+| `--quiet`, `-q`   | Short output: summary and reasons for failing only                                                                        |
+| `--verbose`         | Also list safe packages and fit hints                                                                                     |
+| `--no-color`        | Disable colors (also honours `NO_COLOR`; `FORCE_COLOR` forces them on)                                                |
 
 ### Init options
 
-| Option | Description |
-|---|---|
+| Option      | Description                                                                                                                                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--hooks` | Also run `pkg-guard scan --quiet` before `build` and `start` (only if those scripts exist; existing `prebuild`/`prestart` commands are kept and run after the scan) |
-| `--force` | Overwrite an existing `pkg-guard.config.json` |
+| `--force` | Overwrite an existing `pkg-guard.config.json`                                                                                                                               |
 
 ### Exit codes
 
-| Code | Meaning | What to do |
-|---|---|---|
-| `0` | Passed | Nothing |
-| `1` | Policy violation, for example a high severity vulnerability | Fix it, or review and [ignore it with a reason](#accepting-a-risk-you-have-reviewed) |
-| `2` | Error: bad option, invalid config, no `package.json`, or (with `--strict`) a check could not run | Read the message; it says what to fix |
+| Code  | Meaning                                                                                              | What to do                                                                          |
+| ----- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `0` | Passed                                                                                               | Nothing                                                                             |
+| `1` | Policy violation, for example a high severity vulnerability                                          | Fix it, or review and [ignore it with a reason](#accepting-a-risk-you-have-reviewed) |
+| `2` | Error: bad option, invalid config, no `package.json`, or (with `--strict`) a check could not run | Read the message; it says what to fix                                               |
 
 If there is a violation and a failed check at the same time, the exit code is `1`.
 
@@ -200,7 +200,7 @@ Settings live in `pkg-guard.config.json` in your project root (or under a `"pkg-
 
 ```json
 {
-  "$schema": "./node_modules/pkg-guard/schema.json",
+  "$schema": "./node_modules/@filmona/pkg-guard/schema.json",
   "failOn": "high",
   "production": false,
   "strict": false,
@@ -258,7 +258,7 @@ Sometimes a vulnerability does not affect you (for example, the vulnerable funct
 ## Use it in code
 
 ```js
-const { scan, formatText } = require("pkg-guard"); // or: import { scan, formatText } from "pkg-guard";
+const { scan, formatText } = require("@filmona/pkg-guard"); // or: import { scan, formatText } from "@filmona/pkg-guard";
 
 const result = await scan({ cwd: process.cwd() });
 
@@ -273,12 +273,12 @@ process.exitCode = result.exitCode; // 0, 1 or 2
 
 `scan(options)` accepts:
 
-| Option | Description |
-|---|---|
-| `cwd` | Project folder (default: `process.cwd()`) |
-| `configPath` | Path to a config file |
-| `config` | A config object (same shape as the JSON file). If given, no file is read |
-| `overrides` | `{ failOn, production, strict, skip }`, the same as the command line flags |
+| Option         | Description                                                                  |
+| -------------- | ---------------------------------------------------------------------------- |
+| `cwd`        | Project folder (default: `process.cwd()`)                                  |
+| `configPath` | Path to a config file                                                        |
+| `config`     | A config object (same shape as the JSON file). If given, no file is read     |
+| `overrides`  | `{ failOn, production, strict, skip }`, the same as the command line flags |
 
 The result is plain JSON (`schemaVersion: 1`) with `verdicts`, `violations`, `ignored`, `warnings`, `scannerErrors`, `summary`, `passed` and `exitCode`. Full TypeScript types are included. The same data is printed by `--format json`.
 
@@ -288,17 +288,17 @@ Other exports: `formatJson`, `formatMarkdown`, `loadConfig`, `resolveConfig`, `D
 
 ## Troubleshooting
 
-| You see | Why | Fix |
-|---|---|---|
-| `npm audit failed (ENOLOCK) ... requires an existing lockfile` | There is no `package-lock.json` | Run `npm install` once and commit the lockfile |
-| `npm audit failed ... ENOTFOUND` / `network` | No internet, a proxy, or an unreachable registry | Check your connection and `npm config get registry`. In CI use `--strict` so this fails loudly |
-| `X is listed in package.json but is not installed` | `node_modules` is missing or out of date | Run `npm install` (or `npm ci`) |
-| `N dependencies were not checked for unused status because they are not installed` | Same as above; without the installed package, its command names cannot be read | Run `npm install` first |
-| `This project uses pnpm/yarn ...` | Vulnerability and outdated checks need npm | See [Limitations](#limitations). `unused` and `fit` still work with `--skip audit,outdated` |
-| `Unused-package check skipped: ... workspaces` | The project is a monorepo | Run `pkg-guard` inside each workspace folder |
-| A package is reported unused but you do use it | It is loaded in a way that cannot be seen (see below) | Add it to `unused.ignore` |
-| `pkg-guard: error: unknown option "..."` in config | Typo in the config file | The message lists the allowed names |
-| Scan takes long | Slow registry | Raise `timeoutMs`, or run `--skip outdated` locally and the full scan in CI |
+| You see                                                                              | Why                                                                            | Fix                                                                                                |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `npm audit failed (ENOLOCK) ... requires an existing lockfile`                     | There is no `package-lock.json`                                              | Run `npm install` once and commit the lockfile                                                   |
+| `npm audit failed ... ENOTFOUND` / `network`                                     | No internet, a proxy, or an unreachable registry                               | Check your connection and `npm config get registry`. In CI use `--strict` so this fails loudly |
+| `X is listed in package.json but is not installed`                                 | `node_modules` is missing or out of date                                     | Run `npm install` (or `npm ci`)                                                                |
+| `N dependencies were not checked for unused status because they are not installed` | Same as above; without the installed package, its command names cannot be read | Run `npm install` first                                                                          |
+| `This project uses pnpm/yarn ...`                                                  | Vulnerability and outdated checks need npm                                     | See [Limitations](#limitations). `unused` and `fit` still work with `--skip audit,outdated`   |
+| `Unused-package check skipped: ... workspaces`                                     | The project is a monorepo                                                      | Run `pkg-guard` inside each workspace folder                                                     |
+| A package is reported unused but you do use it                                       | It is loaded in a way that cannot be seen (see below)                          | Add it to `unused.ignore`                                                                        |
+| `pkg-guard: error: unknown option "..."` in config                                 | Typo in the config file                                                        | The message lists the allowed names                                                                |
+| Scan takes long                                                                      | Slow registry                                                                  | Raise `timeoutMs`, or run `--skip outdated` locally and the full scan in CI                    |
 
 Set `PKG_GUARD_DEBUG=1` to print a stack trace for unexpected errors.
 

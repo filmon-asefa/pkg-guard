@@ -278,7 +278,7 @@ export function applyOverrides(config: ResolvedConfig, overrides: ConfigOverride
 /** The file written by `pkg-guard init`. */
 export function defaultConfigFileContent(): string {
   const content = {
-    $schema: "./node_modules/pkg-guard/schema.json",
+    $schema: "./node_modules/@filmona/pkg-guard/schema.json",
     failOn: DEFAULT_CONFIG.failOn,
     production: DEFAULT_CONFIG.production,
     strict: DEFAULT_CONFIG.strict,
