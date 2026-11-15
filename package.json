@@ -1,6 +1,6 @@
 {
   "name": "@filmona/pkg-guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "One command to check your npm dependencies for vulnerabilities, outdated versions and unused packages - and block the build when it matters.",
   "keywords": [
     "npm",
@@ -15,6 +15,14 @@
     "supply-chain"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filmona/pkg-guard.git"
+  },
+  "homepage": "https://github.com/filmona/pkg-guard#readme",
+  "bugs": {
+    "url": "https://github.com/filmona/pkg-guard/issues"
+  },
   "bin": {
     "pkg-guard": "dist/cli.js"
   },
