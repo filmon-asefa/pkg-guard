@@ -1,5 +1,5 @@
 {
-  "name": "pkg-guard",
+  "name": "@filmona/pkg-guard",
   "version": "1.0.0",
   "description": "One command to check your npm dependencies for vulnerabilities, outdated versions and unused packages - and block the build when it matters.",
   "keywords": [
@@ -33,7 +33,6 @@
     "docs",
     "schema.json",
     "README.md",
-    "CHANGELOG.md",
     "LICENSE"
   ],
   "engines": {

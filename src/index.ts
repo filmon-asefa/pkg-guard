@@ -1,7 +1,7 @@
 /**
  * Programmatic API of pkg-guard.
  *
- *   import { scan } from "pkg-guard";
+ *   import { scan } from "@filmona/pkg-guard";
  *   const result = await scan({ cwd: process.cwd() });
  *   if (!result.passed) process.exitCode = result.exitCode;
  */

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://unpkg.com/pkg-guard/schema.json",
+  "$id": "https://unpkg.com/@filmona/pkg-guard/schema.json",
   "title": "pkg-guard configuration",
   "description": "Configuration for pkg-guard (pkg-guard.config.json or the \"pkg-guard\" key in package.json).",
   "type": "object",
