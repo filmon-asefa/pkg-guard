@@ -17,11 +17,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/filmona/pkg-guard.git"
+    "url": "https://github.com/filmon-asefa/pkg-guard.git"
   },
-  "homepage": "https://github.com/filmona/pkg-guard#readme",
+  "homepage": "https://github.com/filmo-asefa/pkg-guard#readme",
   "bugs": {
-    "url": "https://github.com/filmona/pkg-guard/issues"
+    "url": "https://github.com/filmon-asefa/pkg-guard/issues"
   },
   "bin": {
     "pkg-guard": "dist/cli.js"
